@@ -1,0 +1,8 @@
+function convertToInteger(str) {
+  //Radix parseInt(string, radix)
+  // Va del 2 al 36 el radix, 2 es convertir de binario. o base 2
+  str = parseInt(str, 2);
+  return str;
+}
+
+convertToInteger("10011");

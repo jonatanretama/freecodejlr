@@ -1,0 +1,85 @@
+#NOTE IMPORTANT
+#CHECK NEXT VALUES
+
+#IP: 198.204.230.164
+#Password: $infra$0109*Ch
+#User ID:46187
+#License ID: 204278
+#Hostname: saas.oblakdc.net
+
+#Check Hostname
+#hostnamectl
+
+#Change hostname
+#hostnamectl set-hostname <myhostname>
+
+#Install Library's
+yum -y install wget
+yum -y install gcc
+yum -y install gcc-c++
+yum -y install flex
+yum -y install bison
+yum -y install make
+yum -y install bind
+yum -y install bind-libs
+yum -y install bind-utils
+yum -y install openssl
+yum -y install openssl-devel
+yum -y install perl
+yum -y install quota
+yum -y install libaio
+yum -y install libcom_err-devel
+yum -y install libcurl-devel
+yum -y install gd
+yum -y install zlib-devel
+yum -y install zip
+yum -y install unzip
+yum -y install libcap-devel
+yum -y install cronie
+yum -y install bzip2
+yum -y install cyrus-sasl-devel
+yum -y install perl-ExtUtils-Embed
+yum -y install autoconf
+yum -y install automake
+yum -y install libtool
+yum -y install which
+yum -y install patch
+yum -y install mailx
+yum -y install bzip2-devel
+yum -y install lsof
+yum -y install glibc-headers
+yum -y install kernel-devel
+yum -y install expat-devel
+yum -y install psmisc
+yum -y install net-tools
+yum -y install systemd-devel
+yum -y install libdb-devel
+yum -y install perl-DBI
+yum -y install perl-Perl4-CoreLibs
+yum -y install perl-libwww-perl
+yum -y install xfsprogs
+yum -y install rsyslog
+yum -y install logrotate
+yum -y install crontabs
+yum -y install file
+yum -y install kernel-headers
+yum -y install cmake
+yum -y install mod_ssl
+yum -y install git
+yum -y update
+
+#Custom Brand
+git clone https://oblakadmin@bitbucket.org/oblakdev/etc.git
+rm -f /etc/motd
+mv /root/etc/motd /etc
+rm -f /etc/timezone
+mv /root/etc/timezone /etc
+rm -f /etc/resolv.conf
+mv /root/etc/resolv.conf /etc
+rm -R -f /root/etc
+
+#Install Directadmin Control Panel
+cd /root
+wget http://www.directadmin.com/setup.sh
+chmod 755 setup.sh
+./setup.sh

@@ -1,0 +1,42 @@
+function rangeOfNumbers(startNum, endNum) {
+  if (startNum > endNum){
+    return [];
+  } else if (startNum === endNum){
+    return [startNum];
+  } else{
+    var countArray = rangeOfNumbers(startNum, endNum - 1);
+      if(endNum != startNum){
+          countArray.push(endNum);
+          return countArray;
+      } else{
+        return countArray;
+      }    
+  }
+}
+console.log(rangeOfNumbers(1, 5));
+ 
+/* function rangeOfNumbers(startNum, endNum) {
+  if (endNum - startNum === 0) {
+    return [startNum];
+  } else {
+    var numbers = rangeOfNumbers(startNum, endNum - 1);
+    numbers.push(endNum);
+    return numbers;
+  }
+} 
+*/
+
+/* function rangeOfNumbers(startNum, endNum) {
+  return startNum === endNum
+    ? [startNum]
+    : rangeOfNumbers(startNum, endNum - 1).concat(endNum);
+}
+
+*/
+
+/* function rangeOfNumbers(startNum, endNum) {
+  return startNum === endNum
+    ? [startNum]
+    : [...rangeOfNumbers(startNum, endNum - 1), endNum ];
+}
+*/

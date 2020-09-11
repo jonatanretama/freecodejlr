@@ -1,0 +1,24 @@
+var count = 0;
+var status;
+
+function cc(card) {
+  // Only change code below this line
+  if(card >= 2 && card <= 6){
+    count ++;
+  } else if(card >=7 && card <= 9){
+    count += 0;
+  } else if(card == 10 || card == 'J' || card == 'Q' || card == 'K' || card == 'A'){
+    count --;
+  }
+
+  if(count > 0){
+    status = "Bet"
+  } else{
+    status = "Hold"
+  }
+
+  return count + " " +status;
+  // Only change code above this line
+}
+
+cc(2); cc(3); cc(7); cc('K'); cc('A');

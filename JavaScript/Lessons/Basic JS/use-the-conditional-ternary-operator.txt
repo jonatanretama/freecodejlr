@@ -1,0 +1,6 @@
+function checkEqual(a, b) {
+  // Conditional "Ternary operator"
+  return a == b ? "Equal" : "Not Equal";
+}
+
+checkEqual(1, 2);
