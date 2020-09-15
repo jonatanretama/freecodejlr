@@ -1,0 +1,7 @@
+function confirmEnding(str, target) {
+  var matcher = new RegExp(target+"$");
+  var found = matcher.test(str);
+  return (found);
+}
+
+confirmEnding("Bastian", "n");

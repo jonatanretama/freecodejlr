@@ -1,0 +1,11 @@
+function getIndexToIns(arr, num) {
+  let total = 0;
+  for(let i in arr){
+    if(num > arr[i]){
+      total += 1;
+    } 
+  }
+  return total;
+}
+
+getIndexToIns([40, 60], 50);

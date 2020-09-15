@@ -1,0 +1,8 @@
+function titleCase(str) {
+  let regex = /(^|\s)\S/g;
+  str = str.toLowerCase();
+  let ok = str.replace(regex, myFun => myFun.toUpperCase())
+  return ok;
+}
+
+titleCase("I'm a little tea pot");
