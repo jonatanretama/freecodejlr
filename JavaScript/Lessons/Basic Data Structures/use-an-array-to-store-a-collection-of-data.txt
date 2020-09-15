@@ -1,0 +1,1 @@
+let yourArray = ["Jonatan",21,true, "Retama",{house: "tulancingo", university: "UPT"}];
