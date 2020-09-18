@@ -1,37 +1,69 @@
-var typeCash = {
-  "PENNY": 0.01,
-  "NICKEL": 0.05,
-  "DIME": 0.1,
-  "QUARTER": 0.25,
-  "ONE": 1,
-  "FIVE": 5,
-  "TEN": 10,
-  "TWENTY": 20,
-  "ONE HUNDRED": 100
-}
-
+var typeCash = [
+  ["ONE HUNDRED", 100],
+  ["TWENTY", 20],
+  ["TEN", 10],
+  ["FIVE", 5],
+  ["ONE", 1],
+  ["QUARTER", 0.25],
+  ["DIME", 0.1],
+  ["NICKEL", 0.05],
+  ["PENNY", 0.01]
+];
 
 function checkCashRegister(price, cash, cid) {
-    var change;
-    return change;
+    var change = [];        
+    var totalInRegister = 0.0;
+    let cashToBack = cash - price;        
+    
+    for(let i in cid){      
+      for(let j = 1; j < cid[i].length; j += 1){
+        totalInRegister += cid[i][j];           
+      }            
+    }    
+
+    if (totalInRegister === cashToBack){      
+      return {status: "CLOSED", change: cid}
+    } else if (totalInRegister < cashToBack) {      
+      return {status: "INSUFFICIENT_FUNDS", change: []};
+    } else if (totalInRegister > cashToBack) {
+      for(let i in typeCash){
+        let totalSum = 0.0;
+        while(cashToBack >= typeCash[i][1]){
+          if (cid[8 - i][1] === 0){
+            break;
+          }
+          totalSum += typeCash[i][1];          
+          cashToBack -= typeCash[i][1];
+          cashToBack = cashToBack.toFixed(2);
+          console.log(cid[8 - i][1] -= typeCash[i][1]);
+        }
+        if(totalSum != 0){
+          change.push([typeCash[i][0], totalSum]);          
+        }
+      }
+      totalInRegister = 0.0;
+      for(let i = 0; i < change.length; i++){
+        totalInRegister += cid[i][1];        
+      }      
+      if (totalInRegister > cashToBack) {
+        return {status: "OPEN", change: change};          
+      } else{
+        return {status: "INSUFFICIENT_FUNDS", change: []};
+    }
+    } 
   }
-
-
   
-  checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], 
-    ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], 
-    ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+  console.log(checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]));
 
     
+
+
   /*
   checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25],
    ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]) 
    should return {status: "OPEN", change: [["TWENTY", 60], ["TEN", 20], ["FIVE", 15], ["ONE", 1],
     ["QUARTER", 0.5], ["DIME", 0.2], ["PENNY", 0.04]]}
 
-    */
-
-/*
 Design a cash register drawer function checkCashRegister() that accepts purchase price as the first argument 
 (price), payment as the second argument (cash), and cash-in-drawer (cid) as the third argument.
 
