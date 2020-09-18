@@ -1,19 +1,20 @@
 var typeCash = [
-  ["ONE HUNDRED", 100],
-  ["TWENTY", 20],
-  ["TEN", 10],
-  ["FIVE", 5],
-  ["ONE", 1],
-  ["QUARTER", 0.25],
-  ["DIME", 0.1],
+  ["PENNY", 0.01],
   ["NICKEL", 0.05],
-  ["PENNY", 0.01]
+  ["DIME", 0.1],
+  ["QUARTER", 0.25],
+  ["ONE", 1],
+  ["FIVE", 5],
+  ["TEN", 10],    
+  ["TWENTY", 20],
+  ["ONE HUNDRED", 100],
 ];
 
 function checkCashRegister(price, cash, cid) {
     var change = [];        
     var totalInRegister = 0.0;
-    let cashToBack = cash - price;        
+    let cashToBack = cash - price;      
+    let totalSum = 0.0, totalChange = 0.0;        
     
     for(let i in cid){      
       for(let j = 1; j < cid[i].length; j += 1){
@@ -26,30 +27,29 @@ function checkCashRegister(price, cash, cid) {
     } else if (totalInRegister < cashToBack) {      
       return {status: "INSUFFICIENT_FUNDS", change: []};
     } else if (totalInRegister > cashToBack) {
-      for(let i in typeCash){
-        let totalSum = 0.0;
+      for(let i = typeCash.length-1; i >= 0; i--){        
         while(cashToBack >= typeCash[i][1]){
-          if (cid[8 - i][1] === 0){
+          if (cid[i][1] === 0){
             break;
           }
-          totalSum += typeCash[i][1];          
+          totalSum += typeCash[i][1];
           cashToBack -= typeCash[i][1];
           cashToBack = cashToBack.toFixed(2);
-          console.log(cid[8 - i][1] -= typeCash[i][1]);
+          cid[i][1] -= typeCash[i][1];
         }
-        if(totalSum != 0){
-          change.push([typeCash[i][0], totalSum]);          
+        if(totalSum > 0){
+          change.push([typeCash[i][0], totalSum]);      
         }
-      }
-      totalInRegister = 0.0;
-      for(let i = 0; i < change.length; i++){
-        totalInRegister += cid[i][1];        
+        totalSum = 0.0;
+      }    
+      for(let i in change){
+        totalChange += cid[i][1];
       }      
-      if (totalInRegister > cashToBack) {
+      if (totalChange > cashToBack) {
         return {status: "OPEN", change: change};          
       } else{
         return {status: "INSUFFICIENT_FUNDS", change: []};
-    }
+      }
     } 
   }
   
