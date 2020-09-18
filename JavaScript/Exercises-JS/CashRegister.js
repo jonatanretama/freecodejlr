@@ -14,7 +14,7 @@ function checkCashRegister(price, cash, cid) {
     var change = [];        
     var totalInRegister = 0.0;
     let cashToBack = cash - price;      
-    let totalSum = 0.0, totalChange = 0.0;        
+    let totalSum = 0.0, restTotalInCid = 0.0;        
     
     for(let i in cid){      
       for(let j = 1; j < cid[i].length; j += 1){
@@ -43,9 +43,9 @@ function checkCashRegister(price, cash, cid) {
         totalSum = 0.0;
       }    
       for(let i in change){
-        totalChange += cid[i][1];
+        restTotalInCid += cid[i][1];
       }      
-      if (totalChange > cashToBack) {
+      if (restTotalInCid > cashToBack) {
         return {status: "OPEN", change: change};          
       } else{
         return {status: "INSUFFICIENT_FUNDS", change: []};
